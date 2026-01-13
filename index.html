@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Social Network Visualization</h2>
+
+<input id="name" placeholder="Tên user">
+<button onclick="addUser()">Add User</button><br><br>
+
+<input id="a" placeholder="A">
+<input id="b" placeholder="B">
+<button onclick="addFriend()">Add Friend</button><br><br>
+
+<input id="sug" placeholder="Gợi ý cho">
+<button onclick="suggest()">Suggest</button>
+<p id="res"></p>
+
+<script>
+function addUser(){
+ fetch("http://localhost:8080/addUser",{
+  method:"POST",
+  headers:{'Content-Type':'application/x-www-form-urlencoded'},
+  body:"name="+name.value
+ });
+}
+
+function addFriend(){
+ fetch("http://localhost:8080/addFriend",{
+  method:"POST",
+  headers:{'Content-Type':'application/x-www-form-urlencoded'},
+  body:"a="+a.value+"&b="+b.value
+ });
+}
+
+function suggest(){
+ fetch("http://localhost:8080/suggest?name="+sug.value)
+ .then(r=>r.text()).then(t=>res.innerText=t);
+}
+</script>
+</body>
+</html>
